@@ -1,0 +1,8 @@
+#! 0-pythonproject-namespace.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Namespace
+metadata:
+    name: pythonproject
+    labels:
+        com.docker.compose.project: pythonproject

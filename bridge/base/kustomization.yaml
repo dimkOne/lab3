@@ -1,0 +1,17 @@
+#! kustomization.yaml
+# Generated code, do not edit
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+    - 0-pythonproject-namespace.yaml
+    - joomla-C:\Users\matys\PycharmProjects\PythonProject\joomla\custom-php.ini-persistentVolumeClaim.yaml
+    - joomla-deployment.yaml
+    - joomla-expose.yaml
+    - joomla-joomla_data-persistentVolumeClaim.yaml
+    - joomla-service.yaml
+    - joomla_network-network-policy.yaml
+    - mysql-C:\Users\matys\PycharmProjects\PythonProject\mysql\my.cnf-persistentVolumeClaim.yaml
+    - mysql-deployment.yaml
+    - mysql-expose.yaml
+    - mysql-mysql_data-persistentVolumeClaim.yaml
+    - mysql-service.yaml

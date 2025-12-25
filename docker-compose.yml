@@ -1,0 +1,46 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./mysql/my.cnf:/etc/mysql/my.cnf
+    networks:
+      - joomla_network
+    ports:
+      - "3306:3306"
+    command:
+      --max-allowed-packet=64M
+
+  joomla:
+    image: joomla:latest
+    container_name: joomla-web
+    environment:
+      JOOMLA_DB_HOST: mysql:3306
+      JOOMLA_DB_NAME: ${MYSQL_DATABASE}
+      JOOMLA_DB_USER: ${MYSQL_USER}
+      JOOMLA_DB_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - joomla_data:/var/www/html
+      - ./joomla/custom-php.ini:/usr/local/etc/php/conf.d/custom-php.ini
+    networks:
+      - joomla_network
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+    command: |
+      /bin/bash -c "sleep 10 && apache2-foreground"
+
+networks:
+  joomla_network:
+    driver: bridge
+
+volumes:
+  mysql_data:
+  joomla_data:

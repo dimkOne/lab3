@@ -1,0 +1,57 @@
+#! mysql-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: mysql
+    namespace: pythonproject
+    labels:
+        com.docker.compose.project: pythonproject
+        com.docker.compose.service: mysql
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: pythonproject
+            com.docker.compose.service: mysql
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: pythonproject
+                com.docker.compose.service: mysql
+                com.docker.compose.network.joomla_network: "true"
+        spec:
+            containers:
+                - name: mysql-db
+                  image: mysql:8.0
+                  imagePullPolicy: IfNotPresent
+                  args:
+                    - --max-allowed-packet=64M
+                  env:
+                    - name: MYSQL_DATABASE
+                      value: "joomla_db"
+                    - name: MYSQL_PASSWORD
+                      value: "joomla_password"
+                    - name: MYSQL_ROOT_PASSWORD
+                      value: "rootpassword"
+                    - name: MYSQL_USER
+                      value: "joomla_user"
+                  ports:
+                    - name: mysql-3306
+                      containerPort: 3306
+                    - name: mysql-33060
+                      containerPort: 33060
+                  volumeMounts:
+                    - name: var-lib-mysql
+                      mountPath: /var/lib/mysql
+                    - name: etc-mysql-my-cnf
+                      mountPath: /etc/mysql/my.cnf
+            volumes:
+                - name: var-lib-mysql
+                  persistentVolumeClaim:
+                    claimName: mysql-mysql-data
+                - name: etc-mysql-my-cnf
+                  hostPath:
+                    path: C:\Users\matys\PycharmProjects\PythonProject\mysql\my.cnf

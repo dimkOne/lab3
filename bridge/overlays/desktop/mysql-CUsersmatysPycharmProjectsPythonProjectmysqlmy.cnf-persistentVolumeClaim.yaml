@@ -1,0 +1,9 @@
+#! mysql-C:\Users\matys\PycharmProjects\PythonProject\mysql\my.cnf-persistentVolumeClaim.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    name: mysql-c--users-matys-pycharmprojects-pythonproject-mysql-my-cnf
+    namespace: pythonproject
+spec:
+    storageClassName: "hostpath" # see docker/desktop-storage-provisioner

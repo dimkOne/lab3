@@ -1,0 +1,18 @@
+#! mysql-C:\Users\matys\PycharmProjects\PythonProject\mysql\my.cnf-persistentVolumeClaim.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    name: mysql-c--users-matys-pycharmprojects-pythonproject-mysql-my-cnf
+    namespace: pythonproject
+    labels:
+        com.docker.compose.service: mysql
+        com.docker.compose.volume: C:\Users\matys\PycharmProjects\PythonProject\mysql\my.cnf
+spec:
+    accessModes:
+        # TODO would need to check which services use this volume
+        - ReadWriteOnce
+    volumeMode: Filesystem
+    resources:
+        requests:
+            storage: 100Mi

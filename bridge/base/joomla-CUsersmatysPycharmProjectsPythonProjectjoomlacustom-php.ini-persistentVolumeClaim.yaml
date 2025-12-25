@@ -1,0 +1,18 @@
+#! joomla-C:\Users\matys\PycharmProjects\PythonProject\joomla\custom-php.ini-persistentVolumeClaim.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    name: joomla-c--users-matys-pycharmprojects-pythonproject-joomla-custom-php-ini
+    namespace: pythonproject
+    labels:
+        com.docker.compose.service: joomla
+        com.docker.compose.volume: C:\Users\matys\PycharmProjects\PythonProject\joomla\custom-php.ini
+spec:
+    accessModes:
+        # TODO would need to check which services use this volume
+        - ReadWriteOnce
+    volumeMode: Filesystem
+    resources:
+        requests:
+            storage: 100Mi
