@@ -1,0 +1,36 @@
+name: HTML Validation
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**/*.html'
+  pull_request:
+    paths:
+      - '**/*.html'
+
+jobs:
+  html-validation:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Validate HTML with W3C Validator
+        uses: garystafford/w3c-html-validator-action@v1
+        with:
+          urls: 'http://localhost:8080/*' 
+          validate_all_pages: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Fail the build if HTML is invalid
+        run: |
+          if [[ $(cat result.json | jq '.errors | length') -gt 0 ]]; then
+            echo "HTML validation failed!"
+            exit 1
+          else
+            echo "HTML validation passed!"
+          fi
